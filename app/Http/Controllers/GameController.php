@@ -6,8 +6,8 @@ use App\Models\Game;
 use App\Models\Pitch;
 use App\Models\Player;
 use App\Http\Requests\StoreGameRequest;
+use App\Http\Requests\UpdateGameRequest;
 use Illuminate\Http\Client\Request;
-use Label84\HoursHelper\Facades\HoursHelper; 
 
 class GameController extends Controller
 {
@@ -86,24 +86,22 @@ class GameController extends Controller
     /**
         * Update the specified resource in storage.
         *
-        * @param  int  $id
-        * @return Response
+        * @param  Game $game
+        * @return UpdateGameRequest
         */
-    public function update(Request $request, $id)
+    public function update(UpdateGameRequest $request, Game $game)
     {
-        $validateData = $request->validate([
-            'name' => 'required|string|min:3|max:25',
-            'date' => 'required|date',
-            'max_players' => 'required|integer|min:1',
-            'description' => 'required|string|min:3|max:250',
-            'hour_start' => 'required|integer|min:0|max:24',
-            'hour_end' => 'required|integer|min:0|max:24',
-            'pitch_id' => 'required|integer|min:0',
-        ]);
+        // 9.14
+        // if ($request->user()->cannot('update', Country::class)) {
+        //     abort(403);
+        // }
 
-        Game::create($validateData);
-        return redirect()->route('games.index')
-            ->with('success', 'Game is successfully updated');
+        // 9.14
+        //$this->authorize('update', $country);
+
+        $input = $request->all();
+        $game->update($input);
+        return redirect()->route('games.index')->with('success', 'Pomyślnie wprowadzono zmiany.');
     }
 
     /**
