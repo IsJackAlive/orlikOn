@@ -68,14 +68,13 @@
                 </div>
 
             <input type="submit" value="Aktualizuj" class="button">
-            <input type="button" value="Usuń" class="button">
+            <!-- <input type="button" value="Usuń" class="button"> -->
             <input type="button" value="Wróć" onclick="history.back()" class="button">
           </form>
-          <!-- <form method="POST" action="{{ route('games.destroy', $game->id) }}">
-            @csrf 
-            @method('DELETE')
-            <button type="submit">Usuń</button>
-          </form> -->
+          <form method="POST" action="{{ route('games.destroy', $game->id) }}">
+            @csrf @method('DELETE')
+            <button type="submit" class="button">Usuń</button>
+          </form>
         </div>
       </div>
     </div>

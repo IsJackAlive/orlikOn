@@ -8,18 +8,18 @@
     <div class="container">
 
       <div class="card d-flex row mt-4">
-      @if (\Session::has('success'))
-    <div class="alert alert-success">
-        <ul>
-            <li>{!! \Session::get('success') !!}</li>
-        </ul>
-    </div>
-@endif  
+        @if (\Session::has('success'))
+          <div class="alert alert-success">
+            <ul>
+              <li>{!! \Session::get('success') !!}</li>
+            </ul>
+          </div>
+        @endif  
 
         <h3 class="card-header">Najbliższe rozgrywki:</h3>
 
         <div class="row">
-        @forelse($games as $game)
+        @foreach($games as $game)
         <div class="col g-3">
               <div class="card">
                 <img src="{{ asset('storage/img/tt' . $game->id . '.jpg') }}" class="card-img-top" alt="...">
@@ -32,18 +32,18 @@
                     <?php 
                       $p_avalible = 0;
                       for ($i=0; $i < count($players); ++$i) {
-                          $player = $players[$i];
-                          if ($player->game->id == $game->id && ($player->status == "gra" || $player->status == "rezerwowy")) ++$p_avalible; }
+                        $player = $players[$i];
+                        if ($player->game != null) {
+                          if ($player->game->id == $game->id && ($player->status == "gra" || $player->status == "rezerwowy")) ++$p_avalible; 
+                        } 
+                      }
                       $p_left = $game->max_players - $p_avalible;
-                      echo $p_left, "/", $game->max_players; ?>
-                    </a>
+                      echo $p_left, "/", $game->max_players;     ?></a>
                   </div>
               </div>
             </div>
         </div>
-        @empty
-            <p>Brak dostępnych gier.</p>
-        @endforelse
+        @endforeach
         </div>
 
       </div>

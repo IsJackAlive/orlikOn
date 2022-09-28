@@ -8,6 +8,7 @@ use App\Models\Player;
 use App\Http\Requests\StoreGameRequest;
 use App\Http\Requests\UpdateGameRequest;
 use Illuminate\Http\Client\Request;
+use Illuminate\Support\Facades\DB;
 
 class GameController extends Controller
 {
@@ -20,6 +21,7 @@ class GameController extends Controller
     {
         $games = Game::all();
         $players = Player::all();
+        // $players = Player::where('game_id', 2) -> get();
         return view('games.index', [
             'games' => $games,
             'players' => $players
@@ -101,7 +103,8 @@ class GameController extends Controller
 
         $input = $request->all();
         $game->update($input);
-        return redirect()->route('games.index')->with('success', 'Pomyślnie wprowadzono zmiany.');
+        return redirect()->route('games.index')
+            ->with('success', 'Pomyślnie wprowadzono zmiany.');
     }
 
     /**
@@ -113,8 +116,9 @@ class GameController extends Controller
     public function destroy(Game $game)
     {
         $game->delete();
-        return redirect('/games')
-            ->with('success', 'Game Data is successfully deleted');
+        // DB::delete('DELETE FROM games WHERE id = ?', [$game->id]);
+        return redirect()->route('games.index')
+            ->with('success', 'Pomyślnie usunięto.');
     }
 
     public function join($id) 
