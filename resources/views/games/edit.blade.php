@@ -12,8 +12,6 @@
 
     <div class="card d-flex row mt-4">
         <h3 class="card-header">Edytuj grę</h3>
-        <!--  TODO: UWZGLĘDNIJ GODZINY OTWARCIA -->
-        <h3 id="todo">GODZINY OTWARCIA {{ $game->pitch->hour_open }} - {{ $game->pitch->hour_close }}</h3>
 
         @if ($errors->any())
           <div class="alert alert-danger">
@@ -28,8 +26,7 @@
         <div class="row row-cols-1 row-cols-md-2">
         <div class="col g-3">
           <form method="POST" action="{{ route('games.update', $game) }}" class="f-add">
-          @csrf
-          @method('PUT')
+          @csrf @method('PUT')
           <div class="form-group mb-2">
                     <label for="name">Nazwa</label>
                     <input id="name" name="name" type="text" value="{{ $game->name }}"
@@ -37,6 +34,7 @@
                     <div class="invalid-feedback">Nieprawidłowa nazwa!</div>
                 </div>
                 <div class="form-group mb-2">
+                  <p id="todo">Uwzględnij godziny innych gier</p>
                     <label for="hour_start">Start</label>
                     <input id="hour_start" name="hour_start" type="time" min="{{ $game->pitch->hour_open }}" max="{{ $game->pitch->hour_close }}" value="{{ substr($game->hour_start, 0,-3) }}"
                     class="@error('hour_start') is-invalid @else is-valid @enderror new-form">

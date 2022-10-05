@@ -14,6 +14,8 @@ class Game extends Model
         'date', 
         'max_players', 
         'description', 
+        'hour_start',
+        'hour_end',
         'user_id', 
         'pitch_id'
     ];

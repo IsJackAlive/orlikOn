@@ -47,9 +47,11 @@ class GameController extends Controller
         * @param  Request $request
         * @return Response
         */
-    public function store(StoreGameRequest $request)
+    public function store(StoreGameRequest $request, Pitch $pitch)
     {
         $input = $request->all();
+        // $input['pitch_id'] = $pitch->id;
+        // 'hour_end' => 'date_format:H:i',
         Game::create($input);
         return redirect()->route('games.index')
             ->with('success', 'Game is successfully saved');

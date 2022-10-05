@@ -24,13 +24,13 @@ class UpdateGameRequest extends FormRequest
     public function rules()
     {
         return [
-            // Tak było na labach
             'name' => 'required|string|min:3|max:25',
             'date' => 'required|date',
             'max_players' => 'required|integer|min:1',
-            'description' => 'required|string|min:3|max:250',
-            'hour_start' => 'required|date_format:H:i',
-            'hour_end' => 'required|date_format:H:i|after:hour_start',
+            'description' => 'string|max:250',
+            'hour_start' => 'required',
+            'hour_end' => 'required|after:hour_start',
+            // 'hour_end' => 'required|date_format:H:i|after:hour_start',
             // 'user_id' => $this->game->user,
             // 'pitch_id' => $this->game->pitch,
         ];

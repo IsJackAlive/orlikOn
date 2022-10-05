@@ -6,14 +6,13 @@ use App\Http\Controllers\PitchController;
 
 // Route::get('/', function () { return view('welcome'); });
 
-// GAME
 Route::controller(GameController::class)->group(function () {
-    Route::get('/game/{game}/join', 'join')->name('games.join');
+    Route::get('/', 'index')->name('games.new');;
+    Route::get('/games/{pitch}/new', 'new')->name('games.new');
     Route::put('/games/{id}', 'update')->name('games.update');
 });
 Route::resource('games', GameController::class);
 
-// PITCH   
 Route::controller(PitchController::class)->group(function () {
     Route::get('/pitches/search', 'search')->name('pitches.search');
 });
