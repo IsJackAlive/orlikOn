@@ -4,19 +4,16 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\PitchController;
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/test', function () { return view('test'); });
+
+Route::controller(GameController::class)->group(function () {
+    Route::get('/', 'index')->name('games.new');;
+    Route::get('/games/{pitch}/new', 'new')->name('games.new');
+    Route::put('/games/{id}', 'update')->name('games.update');
 });
-
-Route::get('/home', function() {
-    return view('home');
-});
-
-Route::get('/games/new/{pitch_id}', [GameController::class, 'new'])->name('games.new');
-
-Route::get('/game/{game}/join', [GameController::class, 'join'])->name('games.join');
-Route::post('/games/create/{pitch_id}', [GameController::class, 'store']);
 Route::resource('games', GameController::class);
 
-Route::get('/pitches/search', [PitchController::class, 'search'])->name('pitches.search');
+Route::controller(PitchController::class)->group(function () {
+    Route::get('/pitches/search', 'search')->name('pitches.search');
+});
 Route::resource('pitches', PitchController::class);

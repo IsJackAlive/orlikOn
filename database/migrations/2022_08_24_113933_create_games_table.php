@@ -21,8 +21,8 @@ return new class extends Migration
             $table->date('date');
             $table->smallInteger('max_players')->nullable();
             $table->text('description');
-            $table->float('hour_start', 4, 2);
-            $table->float('hour_end', 4, 2);
+            $table->time('hour_start');
+            $table->time('hour_end');
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Pitch::class);
         });

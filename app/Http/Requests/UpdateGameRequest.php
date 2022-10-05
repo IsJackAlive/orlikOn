@@ -24,15 +24,15 @@ class UpdateGameRequest extends FormRequest
     public function rules()
     {
         return [
-            // Tak było na labach
-            'name' => 'required|string|min:3|max:25' .$this->game->id,
+            'name' => 'required|string|min:3|max:25',
             'date' => 'required|date',
             'max_players' => 'required|integer|min:1',
-            'description' => 'required|string|min:3|max:250',
-            'hour_start' => 'required|integer|min:0|max:24',
-            'hour_end' => 'required|integer|min:0|max:24',
-            'user_id' => 'min:0' .$this->game->user,
-            'pitch_id' => 'min:0' .$this->game->pitch,
+            'description' => 'string|max:250',
+            'hour_start' => 'required',
+            'hour_end' => 'required|after:hour_start',
+            // 'hour_end' => 'required|date_format:H:i|after:hour_start',
+            // 'user_id' => $this->game->user,
+            // 'pitch_id' => $this->pitch->id,
         ];
     }
 }

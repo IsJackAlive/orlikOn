@@ -13,7 +13,7 @@
         <div class="row row-cols-1 row-cols-md-2">
         <div class="col g-5">
             <a class="card-title pitch-title" href="{{ route('pitches.show', $game->pitch->id) }}">{{ $game->pitch->name }}</a>
-            <p class="card-text">rezerwacja od: {{ $game->hour_start }} do: {{ $game->hour_end }}</p>
+            <p class="card-text">rezerwacja od: {{ substr($game->hour_start, 0,-3) }} do: {{ substr($game->hour_end, 0,-3) }}</p>
             <p class="card-text">{{ $game->description }}</p>
 
             <!-- TODO: TRUST RATE 

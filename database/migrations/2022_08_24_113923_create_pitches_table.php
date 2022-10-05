@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('name', 25);
             $table->string('address', 50);
             $table->text('description');
-            $table->float('hour_open', 4, 2);
-            $table->float('hour_close', 4, 2);
+            $table->time('hour_open');
+            $table->time('hour_close');
             $table->foreignIdFor(User::class);
         });
     }

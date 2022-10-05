@@ -14,50 +14,56 @@
         <h3 class="card-header">Nowa gra: {{ $pitch->name }}</h3>
         <div class="row row-cols-1 row-cols-md-2">
             <div class="col g-3">
-                <form method="POST" action="{{ route('games.store') }}" class="f-add">
+                <form method="POST" action="{{ route('games.store', [$pitch]) }}" class="f-add">
                 <div class="form-group mb-2">
                     <label for="name" >Nazwa</label>
                     <input id="name" name="name" type="text"
+                    value="Gra"
                     class="@error('name') is-invalid @else is-valid @enderror new-form">
                     <div class="invalid-feedback">Nieprawidłowa nazwa!</div>
                 </div>
                 <div class="form-group mb-2">
+                <p id="todo">Uwzględnij godziny innych gier</p>
                     <label for="hour_start">Start</label>
-                    <input id="hour_start" name="hour_start" type="time" min="{{ $pitch->hour_open }}" max="{{ $pitch->hour_close }}"
+                    <input id="hour_start" name="hour_start" type="time" min="{{ $pitch->hour_open }}" max="{{ $pitch->hour_close }}" 
+                    value="15:00"
                     class="@error('hour_start') is-invalid @else is-valid @enderror new-form">
                     <div class="invalid-feedback">Nieprawidłowa godzina!</div>
                 </div>
                 <div class="form-group mb-2">
                     <label for="hour_end">Koniec</label>
                     <input id="hour_end" name="hour_end" type="time" min="{{ $pitch->hour_open }}" max="{{ $pitch->hour_close }}"
+                    value="16:00"
                     class="@error('hour_end') is-invalid @else is-valid @enderror new-form">
                     <div class="invalid-feedback">Nieprawidłowa godzina!</div>
                 </div>
                 <div class="form-group mb-2">
                     <label for="date">Data</label>
                     <input id="date" name="date" type="date"
+                    value="2022-08-26"
                     class="@error('date') is-invalid @else is-valid @enderror new-form">
                     <div class="invalid-feedback">Nieprawidłowa data!</div>
                 </div>
                 <div class="form-group mb-2">
                     <label for="description">Opis</label>
                     <input id="description" name="description" type="text"
+                    value="Gra"
                     class="@error('description') is-invalid @else is-valid @enderror new-form">
                     <div class="invalid-feedback">Nieprawidłowy opis!</div>
                 </div>
                 <div class="form-group mb-2">
                     <label for="max_players">Max graczy</label>
-                    <input id="max_players" name="max_players" type="number" value="0" min="1"
+                    <input id="max_players" name="max_players" type="number" value="1" min="1"
                     class="@error('max_players') is-invalid @else is-valid @enderror new-form">
                     <div class="invalid-feedback">Nieprawidłowa liczba!</div>
                 </div>
 
                 <!-- TODO NIE MOZE TAK BYC TO NIEBEZPIECZNE -->
                 <div id="todo"> 
+                <a>Tak jest źle</a>
                 <input id="user_id" name="user_id" type="text" value="4">
                 <input id="pitch_id" name="pitch_id" type="text" value="{{ $pitch->id }}">
                 </div>
-                <!--  -->
 
                 <input type="submit" value="Aktualizuj" class="button">
                 <input type="button" value="Wróć" onclick="history.back()" class="button">
