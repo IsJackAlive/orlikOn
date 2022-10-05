@@ -7,8 +7,10 @@ use App\Models\Pitch;
 use App\Models\Player;
 use App\Http\Requests\StoreGameRequest;
 use App\Http\Requests\UpdateGameRequest;
+use App\Models\User;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\DB;
+use Ramsey\Uuid\Type\Integer;
 
 class GameController extends Controller
 {
@@ -43,17 +45,17 @@ class GameController extends Controller
 
     /**
         * Store a newly created resource in storage.
-        *f
+        *
         * @param  Request $request
         * @return Response
         */
     public function store(StoreGameRequest $request, Pitch $pitch)
     {
         $input = $request->all();
-        // $input['pitch_id'] = $pitch->id;
-        // 'hour_end' => 'date_format:H:i',
-        Game::create($input);
-        return redirect()->route('games.index')
+        $input['user_id'] = 4;
+        $input['pitch_id'] = $pitch->id;
+        // Game::create($input);
+        return redirect('/test')
             ->with('success', 'Game is successfully saved');
     }
 

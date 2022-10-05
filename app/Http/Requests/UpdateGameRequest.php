@@ -32,7 +32,7 @@ class UpdateGameRequest extends FormRequest
             'hour_end' => 'required|after:hour_start',
             // 'hour_end' => 'required|date_format:H:i|after:hour_start',
             // 'user_id' => $this->game->user,
-            // 'pitch_id' => $this->game->pitch,
+            // 'pitch_id' => $this->pitch->id,
         ];
     }
 }

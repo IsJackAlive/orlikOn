@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\PitchController;
 
-// Route::get('/', function () { return view('welcome'); });
+Route::get('/test', function () { return view('test'); });
 
 Route::controller(GameController::class)->group(function () {
     Route::get('/', 'index')->name('games.new');;
