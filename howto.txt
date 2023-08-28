@@ -1,0 +1,5 @@
+composer update
+composer install --no-interaction
+php artisan migrate
+php artisan db:seed
+php artisan serve
